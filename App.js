@@ -64,6 +64,7 @@ export default function App() {
       <View style={theme.input}>
         <Text style={theme.wbhginput}>Weight</Text>
         <TextInput
+          minValue = {0}
           style={theme.winput}
           value={weight} 
           onChangeText={text => setWeight(text)}
@@ -74,6 +75,7 @@ export default function App() {
       <View style={theme.input}>
         <Text style={theme.wbhginput}>Bottles</Text>
           <NumericInput
+                  minValue = {0}
                   textColor={'#B1B2FF'}
                   onChange={value => setBottles(value)}
                   rounded
@@ -82,6 +84,7 @@ export default function App() {
               />
         <Text style={theme.wbhginput}>Hours</Text>
           <NumericInput
+                  minValue = {0}
                   textColor={'#B1B2FF'}
                   onChange={value => setTime(value)}
                   rounded
