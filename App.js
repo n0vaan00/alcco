@@ -3,7 +3,7 @@ import Darkstyles from './Darkstyles';
 import React, { useState } from 'react';
 import NumericInput from "react-native-numeric-input";
 import RadioForm from 'react-native-simple-radio-button';
-import { Text, TextInput, View, Button, Switch, Alert } from 'react-native';
+import { Text, TextInput, View, Button, Switch, Alert, ScrollView } from 'react-native';
 
 
 export default function App() {
@@ -42,77 +42,76 @@ export default function App() {
         let result = (left) / (weight * 0.7);
         setAlco(Math.max(0, result));
       }
-  
   }
 
   return (
     <View style={theme.container}>
-
-      <View style={theme.theme}>
-        <Text style={theme.themetext}>Theme</Text>
-        <Switch
-          trackColor={{ false: "#B1B2FF", true: "#EEF1FF" }}
-          thumbColor={isEnabled ? "#D2DAFF" : "#AAC4FF"}
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        ></Switch>
-      </View>
+      <ScrollView>
+        <View style={theme.theme}>
+          <Text style={theme.themetext}>Theme</Text>
+          <Switch
+            trackColor={{ false: "#B1B2FF", true: "#EEF1FF" }}
+            thumbColor={isEnabled ? "#D2DAFF" : "#AAC4FF"}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          ></Switch>
+        </View>
 
       <Text style={theme.header}>Alcometer</Text>
 
+        <View style={theme.input}>
+          <Text style={theme.wbhginput}>Weight</Text>
+          <TextInput
+            minValue = {0}
+            style={theme.winput}
+            value={weight} 
+            onChangeText={text => setWeight(text)}
+            keyboardType='decimal-pad'
+            />
+        </View>
 
-      <View style={theme.input}>
-        <Text style={theme.wbhginput}>Weight</Text>
-        <TextInput
-          minValue = {0}
-          style={theme.winput}
-          value={weight} 
-          onChangeText={text => setWeight(text)}
-          keyboardType='decimal-pad'
-          />
-      </View>
-
-      <View style={theme.input}>
-        <Text style={theme.wbhginput}>Bottles</Text>
-          <NumericInput
-                  minValue = {0}
-                  textColor={'#B1B2FF'}
-                  onChange={value => setBottles(value)}
-                  rounded
-                  leftButtonBackgroundColor='#AAC4FF'
-                  rightButtonBackgroundColor='#AAC4FF'
-              />
-        <Text style={theme.wbhginput}>Hours</Text>
-          <NumericInput
-                  minValue = {0}
-                  textColor={'#B1B2FF'}
-                  onChange={value => setTime(value)}
-                  rounded
-                  leftButtonBackgroundColor='#AAC4FF'
-                  rightButtonBackgroundColor='#AAC4FF'
-              />
-      </View>
-      <View style={theme.input}>
-        <Text style={theme.wbhginput}>Gender</Text>
-          <RadioForm
-            buttonSize= {30}
-            radio_props={radio_props}
-            initial={0}
-            onPress={value => setGender(value)}
-            style= {theme.radio}
-            buttonColor={'#B1B2FF'}
-          />
-      </View>
-      <View>
-        <Text style={theme.result}>{alco.toFixed(2)}</Text>
-      </View>
-      <View>
-        <Button 
-          color={'#B1B2FF'}
-          onPress={calculate} 
-          title="Calculate"
-          rounded />
-      </View>
+        <View style={theme.input}>
+          <Text style={theme.wbhginput}>Bottles</Text>
+            <NumericInput
+                    minValue = {0}
+                    textColor={'#B1B2FF'}
+                    onChange={value => setBottles(value)}
+                    rounded
+                    leftButtonBackgroundColor='#AAC4FF'
+                    rightButtonBackgroundColor='#AAC4FF'
+                />
+          <Text style={theme.wbhginput}>Hours</Text>
+            <NumericInput
+                    minValue = {0}
+                    textColor={'#B1B2FF'}
+                    onChange={value => setTime(value)}
+                    rounded
+                    leftButtonBackgroundColor='#AAC4FF'
+                    rightButtonBackgroundColor='#AAC4FF'
+                />
+        </View>
+        <View style={theme.input}>
+          <Text style={theme.wbhginput}>Gender</Text>
+            <RadioForm
+              buttonSize= {30}
+              radio_props={radio_props}
+              initial={0}
+              onPress={value => setGender(value)}
+              style= {theme.radio}
+              selectedButtonColor= {'#B1B2FF'}
+            />
+        </View>
+        <View>
+          <Text style={theme.result}>{alco.toFixed(2)}</Text>
+        </View>
+        <View>
+          <Button 
+            color={'#B1B2FF'}
+            onPress={calculate} 
+            title="Calculate"
+            rounded />
+        </View>
+      </ScrollView>
     </View>
   );
 }
